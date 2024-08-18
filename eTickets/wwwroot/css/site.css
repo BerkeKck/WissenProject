@@ -1,0 +1,150 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    background-color: #11001C;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    margin: 0;
+}
+
+/* Ýçerik konteynerinin stilini güncelleyin */
+.content-container {
+    flex: 1;
+    overflow-y: auto;
+    padding-top: 15px;
+    padding-bottom: 80px;
+}
+
+/* Kart stili */
+.card {
+    background-color: #1a0f3b; /* Kartýn arka plan rengi */
+    border: none; /* Kartýn kenarlýðýný kaldýrýr */
+    border-radius: 15px; /* Kart köþelerini yuvarlatýr */
+    overflow: hidden; /* Ýçeriðin taþmasýný engeller */
+    transition: transform 0.3s, box-shadow 0.3s; /* Kartýn üzerine gelindiðinde animasyon ekler */
+    display: flex; /* Flexbox kullanarak kart içeriðini düzenler */
+    flex-direction: column; /* Ýçeriði dikey olarak düzenler */
+    height: 100%; /* Kartýn yüksekliðini tamamen doldurur */
+}
+
+    /* Kart üzerine gelindiðinde efekt */
+    .card:hover {
+        transform: scale(1.05); /* Kartýn üzerine gelindiðinde büyütme efekti */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Kartýn üzerine gelindiðinde gölge efekti */
+    }
+
+/* Kart resim stili */
+.card-img-top {
+    width: 100%; /* Resmin geniþliðini kart geniþliðine uyacak þekilde ayarlar */
+    height: 300px; /* Sabit bir yükseklik ayarlayýn */
+    object-fit: cover; /* Resmin kartýn içine düzgün bir þekilde sýðdýrýr */
+}
+
+/* Kart içeriði stili */
+.card-body {
+    padding: 15px; /* Kart içeriðinin etrafýna padding ekleyin */
+}
+
+/* Kart baþlýðý stili */
+.card-title {
+    font-size: 1.5rem; /* Baþlýk font boyutunu büyütün */
+    font-weight: bold; /* Baþlýðý kalýn yapýn */
+    margin-bottom: 10px; /* Baþlýk ve içerik arasýna boþluk ekleyin */
+}
+
+/* Detaylar butonu stili */
+.btn-details {
+    display: block; /* Butonu blok düzeyinde yaparak geniþlik kontrolü saðlar */
+    width: 100%; /* Butonun geniþliðini kart geniþliðine uyacak þekilde ayarlar */
+    padding: 15px; /* Butonun etrafýna padding ekler */
+    font-size: 1.25rem; /* Butonun yazý font boyutunu ayarlar */
+    margin-bottom: 10px; /* Butonlar arasýna boþluk ekler */
+    border-radius: 5px; /* Buton köþelerini yuvarlatýr */
+}
+
+/* Edit ve Delete butonlarýnýn stili */
+.btn-action {
+    flex: 1; /* Butonlarýn geniþliðini eþit olarak ayarlar */
+    margin: 0 5px; /* Butonlar arasýna boþluk ekler */
+    border-radius: 5px; /* Buton köþelerini yuvarlatýr */
+    font-size: 0.875rem; /* Buton yazý font boyutunu ayarlar */
+    padding: 10px; /* Butonun etrafýna padding ekler */
+}
+
+/* Butonlarý yan yana hizalamak için flex container */
+.btn-container {
+    display: flex; /* Butonlarý yatay olarak hizalar */
+    gap: 10px; /* Butonlar arasýna boþluk ekler */
+}
+
+/* Buton renkleri */
+.btn-danger {
+    background-color: #e74c3c; /* Kýrmýzý buton için arka plan rengi */
+    border: none; /* Buton kenarlýðýný kaldýrýr */
+}
+
+.btn-warning {
+    background-color: #f39c12; /* Sarý buton için arka plan rengi */
+    border: none; /* Buton kenarlýðýný kaldýrýr */
+}
+
+/* Kartýn alt kýsmýnýn stili */
+.card-footer {
+    background-color: #2c0034; /* Kartýn alt kýsmýnýn arka plan rengini ayarlar */
+    font-size: 0.875rem; /* Ayarlanmýþ font boyutu */
+    padding: 10px; /* Ýçeriðin etrafýna padding ekler */
+}
+
+    /* Küçük yazýlarýn rengi */
+    .card-footer small {
+        color: #b0b0b0; /* Küçük yazýlarýn rengini ayarlar */
+    }
+
+/* Kartlarýn düzeni için flex container */
+.card-deck {
+    display: flex; /* Kartlarý yatay olarak hizalar */
+    flex-wrap: wrap; /* Kartlarýn satýr sonunda yeni satýra geçmesini saðlar */
+    gap: 1rem; /* Kartlar arasýna boþluk ekler */
+}
+
+/* Küçük ekranlar için kart boyutlarýný ayarlama */
+@media (max-width: 768px) {
+    .card-deck .col-md-4 {
+        flex: 1 1 100%; /* Küçük ekranlarda kartlarý tam geniþlikte yapar */
+    }
+}
+
+/* Orta boy ekranlar için kart boyutlarýný ayarlama */
+@media (min-width: 769px) and (max-width: 992px) {
+    .card-deck .col-md-4 {
+        flex: 1 1 45%; /* Orta boy ekranlarda kartlarý %45 geniþlikte yapar */
+    }
+}
+
+/* Büyük ekranlar için kart boyutlarýný ayarlama */
+@media (min-width: 993px) {
+    .card-deck .col-md-4 {
+        flex: 1 1 30%; /* Büyük ekranlarda kartlarý %30 geniþlikte yapar */
+    }
+}

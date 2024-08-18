@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - eTickets</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+    <style>
+        .navbar-custom {
+            position: fixed; /* Fixed position */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(45deg, #0f0529, #2575fc);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Ensures the navbar stays above other content */
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important; /* White text color */
+        }
+
+            .nav-link:hover {
+                color: #c9d6ff !important; /* Slightly lighter color on hover */
+            }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.5); /* Light border for the toggler */
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.5%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E"); /* White toggler icon */
+        }
+
+        /* Full-height body and flexbox layout */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            padding-top: 56px; /* Add padding equal to navbar height to prevent content overlap */
+        }
+
+        .content-container {
+            flex: 1; /* Allow the main content to grow and take up available space */
+            padding-bottom: 20px; /* Optional: Add some padding at the bottom */
+            overflow-y: auto; /* Dikey kaydırma sağlar */
+        }
+
+        footer {
+            background-color: #0f0529;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%; /* Full width */
+            margin: 0; /* Remove any margin */
+            border-radius: 0; /* Remove border radius */
+        }
+
+        .footer-container {
+            max-width: 1140px;
+            margin: 0 auto; /* Center the footer content */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-custom">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">eTickets</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav me-auto">
+                    <!-- Use me-auto for left-aligned items -->
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Movies">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Actors">Actors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="CinemaSaloons">Cinema Saloons</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="SeatingPlan">Seating Plan</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <!-- Use ms-auto for right-aligned items -->
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="AdminPanel" asp-action="CreateMovie">Admin Panel</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="AdminPanel" asp-action="MovieList">Movie List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Identity" asp-action="Register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Identity" asp-action="Login">Login</a>
+                    </li>
+                    @*  <li class="nav-item">
+                    <a class="nav-link" asp-controller="Identity" asp-action="ForgotPass">Forgot Password</a>
+                    </li> *@
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="content-container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer text-muted">
+        <div class="footer-container">
+            &copy; 2024 - eTickets - <a href="https://github.com/BerkeKck" style="text-decoration: none; target="_blank">Berke Küçük</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

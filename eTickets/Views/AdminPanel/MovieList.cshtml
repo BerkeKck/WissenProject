@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Movie>
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<!-- CSS stilini doğrudan sayfada tanımlama -->
+<style>
+    .card {
+        max-width: 19%;
+        min-width: 19%; /* Kart genişliğini ayarlayın */
+        margin-bottom: 10px; /* Kartlar arasında boşluk */
+        overflow: hidden; /* Kartın içeriğini sınırlandırır */
+    }
+
+    .card-img-top {
+        width: auto%; /* Resmin genişliğini kartın genişliğine uydurur */
+        height: 65%; /* Resmin yüksekliğini sabitler */
+        object-fit: cover; /* Resmi kartın içine düzgün bir şekilde sığdırır */
+    }
+
+    .card-body {
+        height: auto; /* Kart içeriğinin yüksekliğini ayarlar */
+        overflow: hidden; /* İçeriğin taşmasını engeller */
+    }
+
+    .card-footer {
+        font-size: 0.9rem; /* Ayarlanmış font boyutu */
+    }
+
+    .card-deck {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem; /* Kartlar arasında boşluk */
+    }
+</style>
+@{
+    var categories = ViewBag.Categories as List<Category>;
+}
+
+<!-- Dropdown for categories -->
+
+<div class="container mt-4">
+    <label for="category">Category</label>
+    <div class="col-12 row mb-5">
+        <div class="col-8">
+
+            <select id="category" name="categoryId" class="form-control">
+                <option value="">All Categories</option>
+                @foreach (var category in categories)
+                {
+                    <option value="@category.Id">@category.CategoryName</option>
+                }
+            </select>
+        </div>
+        <button id="searchButton" class="btn btn-primary col-4">Search</button>
+    </div>
+    <div class="card-deck">
+        @if(Model == null || !Model.Any())
+        {
+            <h3 class="text-center col-8">Aradığınız kriterlere uygun film bulunamadı!</h3>
+        }
+        @foreach (var movie in Model)
+        {
+            <div class="card shadow-lg">
+                <img src="@($"/images/moviePhotos/{movie.PhotoUrl}")" class="card-img-top" alt="@movie.MovieName" />
+                <div class="card-body">
+                    <h5 class="card-title">@movie.MovieName</h5>
+                    <a asp-action="Details" asp-controller="Home" asp-route-id="@movie.Id" class="btn btn-primary btn-details">Details</a>
+                    <div class="btn-container">
+                        <a asp-action="Delete" asp-controller="AdminPanel" asp-route-id="@movie.Id" class="btn btn-danger btn-action">Delete</a>
+                        <a asp-action="Edit" asp-controller="AdminPanel" asp-route-id="@movie.Id" class="btn btn-warning btn-action">Edit</a>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>Release Date: @movie.ReleaseDate.ToString("MMMM dd, yyyy")</small><br>
+                    <small>Duration: @movie.Duration minutes</small>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/categoryFilter.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Actor>
+@{
+    ViewData["Title"] = "Actors";
+
+}
+
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="css/styles.css" rel="stylesheet" />
+<body>
+    <!-- Page Content-->
+    <div class="container mt-4">
+        <!-- Call to Action-->
+        <div class="card text-white bg-secondary my-5 py-4 text-center">
+            <div class="card-body">
+                <h1 class="text-white m-0">Actors!</h1>
+            </div>
+        </div>
+        <!-- Content Row-->
+        <div class="card-deck">
+            @foreach (var actor in Model)
+            {
+                <div class="card shadow-lg">
+                    <img src="@($"/images/Actors/{actor.PhotoUrl}")" class="card-img-top" alt="@actor.ActorName" />
+                    <div class="card-body">
+                        <h5 class="card-title text-center">@actor.ActorName</h5>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a asp-action="Movies" asp-controller="Home" asp-route-actorId="@actor.Id" class="btn btn-danger btn-action">Go to Films</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</body>

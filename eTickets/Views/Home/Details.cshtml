@@ -1,0 +1,157 @@
+﻿@using eTickets.ViewModels
+@model Movie
+
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20;
+        }
+
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1a0f3b;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: nowrap;
+            margin: 0 -15px;
+        }
+
+        .col-md-4, .col-md-8 {
+            padding: 0 15px;
+        }
+
+        .col-md-4 {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .col-md-8 {
+            flex: 2;
+            padding: 20px;
+        }
+
+        .movie-img {
+            width: 100%;
+            height: auto;
+            max-width: 300px; /* Maksimum genişlik */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        h2, h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        p, li {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .actor-link {
+            color: White;
+            text-decoration: none;
+        }
+
+            .actor-link:hover {
+                text-decoration: underline;
+            }
+
+        .btn {
+            display: inline-block;
+            font-size: 1em;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            color: #fff;
+            background-color: #6c757d;
+        }
+
+            .btn:hover {
+                background-color: #5a6268;
+            }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+            .btn-danger:hover {
+                background-color: #c82333;
+            }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Film Fotoğrafı -->
+            <div class="col-md-4">
+                <img src="@($"/images/moviePhotos/{Model.PhotoUrl}")" class="movie-img" alt="@Model.MovieName" />
+            </div>
+            <!-- Film Detayları -->
+            <div class="col-md-8">
+                <h2>@Model.MovieName</h2>
+                <p><strong>Release Date:</strong> @Model.ReleaseDate.ToString("MMMM yyyy")</p>
+                <p><strong>Duration:</strong> @Model.Duration minutes</p>
+                <p><strong>Description:</strong> @Model.Description</p>
+                <h3>Actors</h3>
+                <ul>
+                    @if (ViewBag.MovieActors != null)
+                    {
+                        foreach (var actor in (List<Actor>)ViewBag.MovieActors)
+                        {
+                            <li>
+                                <a href="@Url.Action("Movies", "Home", new { actorId = actor.Id })" class="actor-link">
+                                    @actor.ActorName
+                                </a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li>No actors available</li>
+                    }
+                </ul>
+                <h3>Categories</h3>
+                <ul>
+                    @if (ViewBag.MovieCategories != null)
+                    {
+                        foreach (var category in (List<Category>)ViewBag.MovieCategories)
+                        {
+                            <li>@category.CategoryName</li>
+                        }
+                    }
+                    else
+                    {
+                        <li>No category available</li>
+                    }
+                </ul>
+
+                <!-- Buy Ticket Butonu -->
+                <a asp-action="Seating" asp-controller="Home" asp-route-id="@Model.Id" class="btn btn-danger btn-action">Buy Ticket</a>
+
+                <!-- Back to list Butonu -->
+                <a class="btn" asp-controller="Home" asp-action="Movies">Back to list</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

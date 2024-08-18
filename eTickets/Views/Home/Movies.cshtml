@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Movie>
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<!-- CSS stilini doğrudan sayfada tanımlama -->
+<style>
+    .card {
+        overflow: hidden; 
+    }
+</style>
+@if (ViewBag.ActorName != null)
+{
+    <h2 class="text-center border-bottom mx-5">@($"{ViewBag.ActorName}'s") Films</h2>
+}
+<div class="container mt-4">
+    <div class="card-deck">
+        @foreach (var movie in Model)
+        {
+            <div class="card shadow-lg">
+                <img src="@($"/images/moviePhotos/{movie.PhotoUrl}")" class="card-img-top" alt="@movie.MovieName" />
+                <div class="card-body">
+                    <h5 class="card-title">@movie.MovieName</h5>
+                    <a asp-action="Details" asp-controller="Home" asp-route-id="@movie.Id" class="btn btn-primary btn-details">Details</a>
+                    <div class="btn-container">
+                        <a asp-action="Seating" asp-controller="Home" asp-route-id="@movie.Id" class="btn btn-danger btn-action">Buy Ticket </a>
+                    </div>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>Release Date: @movie.ReleaseDate.ToString("MMMM dd, yyyy")</small><br>
+                    <small>Duration: @movie.Duration minutes</small>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,239 @@
+﻿@model Movie
+
+<style>
+    .card-img-top {
+        width: auto; /* Resmin genişliğini kartın genişliğine uydurur */
+        height: 500px; /* Resmin yüksekliğini sabitler */
+        object-fit: fill; /* Resmi kartın içine düzgün bir şekilde sığdırır */
+    }
+
+    .btn.disabled {
+        background-color: #6c757d; /* Devre dışı bırakılmış durumda gri renk */
+        cursor: not-allowed; /* Fare imlecini devre dışı bırakılmış buton için uygun şekilde gösterir */
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - eTickets</title>
+    <link rel="stylesheet" href="~/css/Seating.css" asp-append-version="true" />
+</head>
+<head>
+    <div class="col-12  text-center py-2 pb-0">
+        <img src="@($"/images/moviePhotos/{@Model.PhotoUrl}")" class="card-img-top" alt="@Model.MovieName" />
+        <p class="col-12">@Model.MovieName     -      @Model.ReleaseDate.ToString("MMMM yyyy ") </p>
+        <p class="col-12">@Model.Duration minutes</p>
+        <p class="col-12">@Model.Description</p>
+    </div>
+<body>
+    <div class="movie-container">
+        <label>Pick a movie saloon:</label>
+        <select id="saloon">
+            <option value="20">IMAX ($20)</option>
+            <option value="25">4DX ($25)</option>
+            <option value="35">Gold Class ($35)</option>
+            <option value="30">Premium Cinema ($30)</option>
+            <option value="40">8D ($40)</option>
+        </select>
+    </div>
+
+    <ul class="showcase">
+        <li>
+            <div class="seat grey"></div>
+            <small>Available</small>
+        </li>   
+        <li>
+            <div class="seat green"></div>
+            <small>Selected</small>
+        </li>
+        <li>
+            <div class="seat occupied"></div>
+            <small>Occupied</small>
+        </li>
+    </ul>
+
+
+        <div class="container">
+            <div class="screen"></div>
+
+            <!-- Row A -->
+            <div class="row">
+                <div class="seat" data-row="A" data-col="1"></div>
+                <div class="seat" data-row="A" data-col="2"></div>
+                <div class="seat" data-row="A" data-col="3"></div>
+                <div class="seat" data-row="A" data-col="4"></div>
+                <div class="seat" data-row="A" data-col="5"></div>
+                <div class="seat" data-row="A" data-col="6"></div>
+                <div class="seat" data-row="A" data-col="7"></div>
+                <div class="seat" data-row="A" data-col="8"></div>
+                <div class="seat" data-row="A" data-col="9"></div>
+                <div class="seat" data-row="A" data-col="10"></div>
+                <div class="seat" data-row="A" data-col="11"></div>
+                <div class="seat" data-row="A" data-col="12"></div>
+            </div>
+
+            <!-- Row B -->
+            <div class="row">
+                <div class="seat" data-row="B" data-col="1"></div>
+                <div class="seat" data-row="B" data-col="2"></div>
+                <div class="seat" data-row="B" data-col="3"></div>
+                <div class="seat" data-row="B" data-col="4"></div>
+                <div class="seat" data-row="B" data-col="5"></div>
+                <div class="seat" data-row="B" data-col="6"></div>
+                <div class="seat" data-row="B" data-col="7"></div>
+                <div class="seat" data-row="B" data-col="8"></div>
+                <div class="seat" data-row="B" data-col="9"></div>
+                <div class="seat" data-row="B" data-col="10"></div>
+                <div class="seat" data-row="B" data-col="11"></div>
+                <div class="seat" data-row="B" data-col="12"></div>
+            </div>
+
+            <!-- Row C -->
+            <div class="row">
+                <div class="seat" data-row="C" data-col="1"></div>
+                <div class="seat" data-row="C" data-col="2"></div>
+                <div class="seat" data-row="C" data-col="3"></div>
+                <div class="seat" data-row="C" data-col="4"></div>
+                <div class="seat" data-row="C" data-col="5"></div>
+                <div class="seat" data-row="C" data-col="6"></div>
+                <div class="seat" data-row="C" data-col="7"></div>
+                <div class="seat" data-row="C" data-col="8"></div>
+                <div class="seat" data-row="C" data-col="9"></div>
+                <div class="seat" data-row="C" data-col="10"></div>
+                <div class="seat" data-row="C" data-col="11"></div>
+                <div class="seat" data-row="C" data-col="12"></div>
+            </div>
+
+            <!-- Row D -->
+            <div class="row">
+                <div class="seat" data-row="D" data-col="1"></div>
+                <div class="seat" data-row="D" data-col="2"></div>
+                <div class="seat" data-row="D" data-col="3"></div>
+                <div class="seat" data-row="D" data-col="4"></div>
+                <div class="seat" data-row="D" data-col="5"></div>
+                <div class="seat" data-row="D" data-col="6"></div>
+                <div class="seat" data-row="D" data-col="7"></div>
+                <div class="seat" data-row="D" data-col="8"></div>
+                <div class="seat" data-row="D" data-col="9"></div>
+                <div class="seat" data-row="D" data-col="10"></div>
+                <div class="seat" data-row="D" data-col="11"></div>
+                <div class="seat" data-row="D" data-col="12"></div>
+            </div>
+
+            <!-- Row E -->
+            <div class="row">
+                <div class="seat" data-row="E" data-col="1"></div>
+                <div class="seat" data-row="E" data-col="2"></div>
+                <div class="seat" data-row="E" data-col="3"></div>
+                <div class="seat" data-row="E" data-col="4"></div>
+                <div class="seat" data-row="E" data-col="5"></div>
+                <div class="seat" data-row="E" data-col="6"></div>
+                <div class="seat" data-row="E" data-col="7"></div>
+                <div class="seat" data-row="E" data-col="8"></div>
+                <div class="seat" data-row="E" data-col="9"></div>
+                <div class="seat" data-row="E" data-col="10"></div>
+                <div class="seat" data-row="E" data-col="11"></div>
+                <div class="seat" data-row="E" data-col="12"></div>
+            </div>
+
+            <!-- Row F -->
+            <div class="row">
+                <div class="seat" data-row="F" data-col="1"></div>
+                <div class="seat" data-row="F" data-col="2"></div>
+                <div class="seat" data-row="F" data-col="3"></div>
+                <div class="seat" data-row="F" data-col="4"></div>
+                <div class="seat" data-row="F" data-col="5"></div>
+                <div class="seat" data-row="F" data-col="6"></div>
+                <div class="seat" data-row="F" data-col="7"></div>
+                <div class="seat" data-row="F" data-col="8"></div>
+                <div class="seat" data-row="F" data-col="9"></div>
+                <div class="seat" data-row="F" data-col="10"></div>
+                <div class="seat" data-row="F" data-col="11"></div>
+                <div class="seat" data-row="F" data-col="12"></div>
+            </div>
+
+            <!-- Row G -->
+            <div class="row">
+                <div class="seat" data-row="G" data-col="1"></div>
+                <div class="seat" data-row="G" data-col="2"></div>
+                <div class="seat" data-row="G" data-col="3"></div>
+                <div class="seat" data-row="G" data-col="4"></div>
+                <div class="seat" data-row="G" data-col="5"></div>
+                <div class="seat" data-row="G" data-col="6"></div>
+                <div class="seat" data-row="G" data-col="7"></div>
+                <div class="seat" data-row="G" data-col="8"></div>
+                <div class="seat" data-row="G" data-col="9"></div>
+                <div class="seat" data-row="G" data-col="10"></div>
+                <div class="seat" data-row="G" data-col="11"></div>
+                <div class="seat" data-row="G" data-col="12"></div>
+            </div>
+            
+        </div>
+
+    <script src="script.js"></script>
+    
+    </body>
+    </head>
+</html>
+
+<p class="text">
+    You have selected seats: <span id="seatsSelected">None</span>
+    for the price of $<span id="totalPrice">0</span>
+</p>
+
+<div class="btn-container">
+    <a id="buyTicketBtn" class="btn btn-danger btn-action ">Buy Now</a>
+</div>
+
+<script src="script.js"></script>
+
+<script>    
+    const saloonSelected = document.getElementById('saloon');
+    const seatsSelected = document.getElementById('seatsSelected');
+    const totalPrice = document.getElementById('totalPrice');
+    const container = document.querySelector('.container');
+    const buyTicketBtn = document.getElementById('buyTicketBtn');
+
+    const updatePrice = () => {
+        const selectedSeats = document.querySelectorAll('.container .seat.selected:not(.occupied)');
+        const selectedSeatsCount = selectedSeats.length;
+        const selectedSeatsInfo = [];
+
+        selectedSeats.forEach(seat => {
+            const row = seat.getAttribute('data-row');
+            const col = seat.getAttribute('data-col');
+            selectedSeatsInfo.push(`${row}${col}`);
+        });
+
+        seatsSelected.innerText = selectedSeatsInfo.join(', ');
+        totalPrice.innerText = selectedSeatsCount * +saloonSelected.value;
+        updateButtonState();
+    };
+
+    container.addEventListener('click', (e) => {
+        if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
+            e.target.classList.toggle('selected');
+            updatePrice();
+        }
+    });
+
+    buyTicketBtn.addEventListener('click', () => {
+        const seats = seatsSelected.innerText;
+        const price = totalPrice.innerText;
+       //var selectedText = saloonSelected.options[dropdown.selectedIndex].text;
+        const saloonLast = saloonSelected.options[saloonSelected.selectedIndex].text;
+        const url = `@Url.Action("BuyTicket", "Home", new { id = @Model.Id })?seats=${encodeURIComponent(seats)}&price=${price}&selectedSaloon=${saloonLast}`;
+        buyTicketBtn.href = url;
+    });
+
+    saloonSelected.addEventListener('change', updatePrice);
+    //salon seçilince aşağı kayacak
+    document.getElementById('saloon').addEventListener('change', () => {
+        window.scrollTo({
+            top: document.querySelector('.container').offsetTop,
+            behavior: 'smooth'
+        });
+    });
+</script>
