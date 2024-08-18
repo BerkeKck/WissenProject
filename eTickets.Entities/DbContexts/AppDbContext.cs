@@ -2,11 +2,18 @@
 using eTickets.Entities.Model.Concrete;
 using eTickets.Entities.EntityConfig.Concrete;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace eTickets.Entities.DbContexts
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<IdentityUser> 
     {
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Actor> Actors { get; set; }
@@ -15,10 +22,7 @@ namespace eTickets.Entities.DbContexts
         public DbSet<MovieCategory> MovieCategories { get; set; }
 
     
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options)
-        {
-        }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

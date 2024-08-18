@@ -1,8 +1,10 @@
 using eTickets.BL.Managers.Abstract;
 using eTickets.BL.Managers.Concrete;
 using eTickets.Entities.DbContexts;
+using eTickets.Entities.Model.Concrete;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
@@ -22,14 +24,17 @@ namespace eTickets
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            builder.Services.AddRazorPages();
+
             //Identity
-            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-            .AddEntityFrameworkStores<AppDbContext>()
-            .AddDefaultTokenProviders();
+            //builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+            //.AddEntityFrameworkStores<AppDbContext>()
+            //.AddDefaultTokenProviders();    
 
-            builder.Services.AddScoped<IMovieManager, MovieManager>();
+            builder.Services.AddScoped<IMovieManager, MovieManager>();  
 
-
+            builder.Services.AddScoped<IEmailSender,EmailSender>();
             builder.Services.AddScoped<IActorManager, ActorManager>();
             builder.Services.AddScoped<IMovieActorManager, MovieActorManager>();
 
@@ -58,9 +63,9 @@ namespace eTickets
             app.UseStaticFiles();
 
             app.UseRouting();
-            app.UseAuthentication(); // Kimlik doðrulama middleware'i
+            app.UseAuthentication(); // Kimlik doï¿½rulama middleware'i
             app.UseAuthorization(); // Yetkilendirme middleware'i
-
+            app.MapRazorPages();
             // Admin routes
             /* app.MapControllerRoute(
              name: "admin",

@@ -1,0 +1,93 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">@ViewData["Title"]</h2>
+                    <form id="account" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <label asp-for="Input.Email">Email</label>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Password" class="form-control" type="password" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                            <label asp-for="Input.Password">Password</label>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            <label class="form-check-label" asp-for="Input.RememberMe">Remember me</label>
+                        </div>
+                        <div class="d-grid">
+                            <button id="login-submit" type="submit" class="btn btn-primary btn-lg">Log in</button>
+                        </div>
+                        <hr class="my-4">
+                        <div class="text-center">
+                            <a id="forgot-password" asp-page="./ForgotPassword" class="link-primary">Forgot your password?</a>
+                        </div>
+                        <div class="text-center">
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="link-primary">Register as a new user</a>
+                        </div>
+                        <div class="text-center">
+                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation" class="link-primary">Resend email confirmation</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    body {
+    }
+
+    .card {
+        border: none;
+        border-radius: 1rem;
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .form-floating label {
+        color: #6c757d;
+    }
+
+    .form-floating input:focus + label {
+        color: #495057;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+    .link-primary {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .link-primary:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+</style>
