@@ -25,7 +25,15 @@ namespace eTickets
                 options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+            builder.Services.ConfigureApplicationCookie(options => {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
             builder.Services.AddRazorPages();
+
+
+            
 
             //Identity
             //builder.Services.AddIdentity<IdentityUser, IdentityRole>()

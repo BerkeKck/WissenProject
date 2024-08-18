@@ -1,9 +1,13 @@
 ﻿using eTickets.BL.Managers.Abstract;
 using eTickets.BL.Managers.Concrete;
+using eTickets.Entities.Model.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTickets.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles =SD.Role_Admin)]
     public class MovieController : Controller
     {
         private readonly MovieManager _movieManager;

@@ -7,12 +7,10 @@ using eTickets.Entities.Model.Concrete;
 using eTickets.BL.Managers.Abstract;
 using eTickets.BL.Managers.Concrete;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Authorization;
 
 namespace eTickets.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)]//Sadece admin 
+
     public class AdminPanelController : Controller
     {
         private readonly IMovieManager _movieManager;
@@ -34,7 +32,7 @@ namespace eTickets.Controllers
         }
 
 
-        [Authorize(Roles = SD.Role_Admin)]
+
         public async Task<IActionResult> CreateMovie()
         {
             CreateMovieViewModel model = new CreateMovieViewModel();
@@ -111,8 +109,6 @@ namespace eTickets.Controllers
             ViewData["Categories"] = new SelectList(await _categoryManager.GetAllAsync(), "Id", "Name"); return View(model);
         }
         // GET: AdminPanel/Delete/5
-
-        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> Delete(int id)
         {
             var movie = await _movieManager.GetByIdAsync(id);
@@ -126,8 +122,6 @@ namespace eTickets.Controllers
         // POST: AdminPanel/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-
-        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var movie = await _movieManager.GetByIdAsync(id);
@@ -138,8 +132,6 @@ namespace eTickets.Controllers
             }
             return NotFound(); // Film bulunamadıysa 404 döndür
         }
-
-        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> Edit(int id)
         {
             var movie = await _movieManager.GetByIdAsync(id);
@@ -167,7 +159,6 @@ namespace eTickets.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = SD.Role_Admin)]
         public async Task<IActionResult> Edit(EditMovieViewModel model)
         {
             if (ModelState.IsValid)
